@@ -29,64 +29,31 @@ body {
   cursor: pointer;
 }
 
-.game-over {
-  background-color: red;
-  opacity: 0.8;
-}
-
-.red {
-  background-color: red;
-}
-
-.green {
-  background-color: green;
-}
-
-.blue {
-  background-color: blue;
-}
-
-.yellow {
-  background-color: yellow;
-}
+.red { background-color: red; }
+.green { background-color: green; }
+.blue { background-color: blue; }
+.yellow { background-color: yellow; }
 
 .pressed {
   box-shadow: 0 0 20px white;
   background-color: grey;
 }
 
-/* ===== Tablets (max-width: 768px) ===== */
-@media (max-width: 768px) {
-  #level-title {
-    font-size: 2rem;
-    margin: 30px;
-  }
-
-  .btn {
-    height: 150px;
-    width: 150px;
-    border: 8px solid black;
-  }
-
-  .container {
-    gap: 15px;
-  }
+.game-over {
+  background-color: red;
+  opacity: 0.8;
 }
 
-/* ===== Mobile (max-width: 480px) ===== */
+/* ===== Tablets ===== */
+@media (max-width: 768px) {
+  #level-title { font-size: 2rem; margin: 30px; }
+  .btn { height: 150px; width: 150px; border: 8px solid black; }
+  .container { gap: 15px; }
+}
+
+/* ===== Mobile ===== */
 @media (max-width: 480px) {
-  #level-title {
-    font-size: 1.2rem;
-    margin: 20px;
-  }
-
-  .btn {
-    height: 100px;
-    width: 100px;
-    border: 6px solid black;
-  }
-
-  .container {
-    gap: 10px;
-  }
+  #level-title { font-size: 1.2rem; margin: 20px; }
+  .btn { height: 100px; width: 100px; border: 6px solid black; }
+  .container { gap: 10px; }
 }

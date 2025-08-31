@@ -1,104 +1,109 @@
-var gamePattern = [];
+$(document).ready(function () {
 
-var buttonColors = ["red", "blue", "green", "yellow"];
+    var gamePattern = [];
+    var buttonColors = ["red", "blue", "green", "yellow"];
+    var userClickedPattern = [];
+    var started = false;
+    var level = 0;
 
-var userClickedPattern = [];
-
-var started = false;
-
-var level = 0;
-
-$(".btn").click(function () {
-    var userChosenColour = $(this).attr("id");
-
-    userClickedPattern.push(userChosenColour);
-
-    playSound(userChosenColour);
-    animatePress(userChosenColour);
-    checkAnswer(userClickedPattern.length - 1);
-});
-
-
-function nextSequence() {
-    userClickedPattern = [];
-    level++;
-    $("#level-title").text("Level " + level);
-    var randomNumber = Math.floor(Math.random() * 4);
-    var randomChosenColour = buttonColors[randomNumber];
-
-    gamePattern.push(randomChosenColour);
-
-    $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
-
-    playSound(randomChosenColour);
-
-}
-
-function animatePress(currentColour) {
-    $("#" + currentColour).addClass("pressed");
-
-    setTimeout(function () {
-        $("#" + currentColour).removeClass("pressed");
-    }, 100);
-}
-
-function playSound(name) {
-    var audio = new Audio("sounds/" + name + ".mp3");
-    audio.play();
-}
-
-$(document).keydown(function () {
-    if (!started) {
-        $("#level-title").text("Level " + level);
-        nextSequence();   // Call your function to start the game
-        started = true;   // Mark the game as started
+    // Play sound
+    function playSound(name) {
+        var audio = new Audio("sounds/" + name + ".mp3");
+        audio.play();
     }
-});
 
-function checkAnswer(currentLevel) {
-    if (userClickedPattern[currentLevel] === gamePattern[currentLevel]) {
-        console.log("success");
+    // Animate button press
+    function animatePress(currentColour) {
+        $("#" + currentColour).addClass("pressed");
+        setTimeout(function () {
+            $("#" + currentColour).removeClass("pressed");
+        }, 100);
+    }
 
-        if (userClickedPattern.length === gamePattern.length) {
-            setTimeout(function () {
-                nextSequence();
-            }, 1000);
+    // Next sequence
+    function nextSequence() {
+        userClickedPattern = [];
+        level++;
+        $("#level-title").text("Level " + level);
+        var randomNumber = Math.floor(Math.random() * 4);
+        var randomChosenColour = buttonColors[randomNumber];
+        gamePattern.push(randomChosenColour);
+        $("#" + randomChosenColour).fadeIn(100).fadeOut(100).fadeIn(100);
+        playSound(randomChosenColour);
+    }
+
+    // Check user answer
+    function checkAnswer(currentLevel) {
+        if (userClickedPattern[currentLevel] === gamePattern[currentLevel]) {
+            if (userClickedPattern.length === gamePattern.length) {
+                setTimeout(nextSequence, 1000);
+            }
+        } else {
+            playSound("wrong");
+            $("body").addClass("game-over");
+            $("#level-title").text("Game Over, Tap/Press to Restart");
+            setTimeout(function () { $("body").removeClass("game-over"); }, 200);
+            startOver();
         }
     }
-    else {
-        console.log("wrong");
-        playSound("wrong");
-        $("#level-title").text("Game Over, Press Any Key to Restart");
 
-        $("body").addClass("game-over");
-        setTimeout(function () {
-            $("body").removeClass("game-over");
-        }, 200);
-        
-        startOver();
+    // Restart game
+    function startOver() {
+        level = 0;
+        gamePattern = [];
+        started = false;
+        setStartTitle();
     }
-}
 
-function startOver(){
-    level = 0;
-    gamePattern = [];
-    started = false;
-}
-
-// Start game on key press (desktop)
-$(document).keydown(function () {
-    if (!started) {
-        $("#level-title").text("Level " + level);
-        nextSequence();
-        started = true;
+    // Detect mobile (reliable touch detection)
+    function isMobile() {
+        return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     }
-});
 
-// Start game on tap/click (mobile)
-$("#level-title").click(function () {
-    if (!started) {
-        $("#level-title").text("Level " + level);
-        nextSequence();
-        started = true;
+    // Set initial title
+    function setStartTitle() {
+        if (!started) {
+            if (isMobile()) {
+                $("#level-title").text("Tap Here to Start");
+            } else {
+                $("#level-title").text("Press A Key to Start");
+            }
+        }
     }
+
+    // Initial title setup
+    setStartTitle();
+
+    // Button click
+    $(".btn").click(function () {
+        var userChosenColour = $(this).attr("id");
+        userClickedPattern.push(userChosenColour);
+        playSound(userChosenColour);
+        animatePress(userChosenColour);
+        checkAnswer(userClickedPattern.length - 1);
+    });
+
+    // Start game - keyboard for desktop
+    $(document).keydown(function () {
+        if (!started && !isMobile()) {
+            $("#level-title").text("Level " + level);
+            nextSequence();
+            started = true;
+        }
+    });
+
+    // Start game - tap for mobile or desktop
+    $("#level-title").click(function () {
+        if (!started) {
+            $("#level-title").text("Level " + level);
+            nextSequence();
+            started = true;
+        }
+    });
+
+    // Update title on resize/rotate
+    $(window).on('resize orientationchange', function () {
+        setStartTitle();
+    });
+
 });

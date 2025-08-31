@@ -1,32 +1,33 @@
+/* ===== Desktop ===== */
 body {
-  text-align: center;
-  background-color: #011F3F;
-  margin: 0;
+    text-align: center;
+    background-color: #011F3F;
+    margin: 0;
 }
 
 #level-title {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 3rem;
-  margin: 5%;
-  color: #FEF2BF;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 3rem;
+    margin: 5%;
+    color: #FEF2BF;
 }
 
 .container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
-  width: fit-content;
-  margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    margin: auto;
 }
 
 .btn {
-  border: 10px solid black;
-  border-radius: 20%;
-  cursor: pointer;
-  aspect-ratio: 1 / 1; /* Keep buttons square */
-  width: 200px; /* default desktop */
+    height: 200px;
+    width: 200px;
+    border: 10px solid black;
+    border-radius: 20%;
+    cursor: pointer;
 }
 
 .red { background-color: red; }
@@ -35,36 +36,53 @@ body {
 .yellow { background-color: yellow; }
 
 .pressed {
-  box-shadow: 0 0 20px white;
-  background-color: grey;
+    box-shadow: 0 0 20px white;
+    background-color: grey;
 }
 
 .game-over {
-  background-color: red;
-  opacity: 0.8;
+    background-color: red;
+    opacity: 0.8;
 }
 
-/* ===== Tablets ===== */
+/* ===== Tablets (max-width: 768px) ===== */
 @media (max-width: 768px) {
-  #level-title { font-size: 2.2rem; margin: 30px; }
-  .btn { width: 220px; }
-  .container { gap: 20px; }
+    #level-title {
+        font-size: 2.2rem;
+        margin: 30px;
+    }
+
+    .btn {
+        height: 250px;
+        width: 250px;
+        border: 10px solid black;
+    }
+
+    .container {
+        gap: 20px;
+    }
 }
 
-/* ===== Mobile ===== */
+/* ===== Mobile (max-width: 480px) ===== */
 @media (max-width: 480px) {
-  #level-title { font-size: 1.8rem; margin: 20px; }
+    #level-title {
+        font-size: 1.8rem;
+        margin: 15px;
+    }
 
-  /* Make buttons big but fit screen width */
-  .container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    width: 100%;
-    max-width: 350px; /* optional max size for very small screens */
-  }
+    .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        width: 100%;
+        max-width: 400px;
+        margin: auto;
+        padding: 0 10px;
+    }
 
-  .btn {
-    width: 45vw; /* buttons take 45% of screen width each */
-    max-width: 160px; /* prevent too large on bigger phones */
-  }
+    .btn {
+        width: 100%;
+        aspect-ratio: 1;
+        border: 8px solid black;
+    }
 }

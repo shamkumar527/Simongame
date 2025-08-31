@@ -55,9 +55,9 @@ $(document).ready(function () {
         setStartTitle();
     }
 
-    // Detect mobile (reliable touch detection)
+    // Detect mobile (touch devices)
     function isMobile() {
-        return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        return ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
     }
 
     // Set initial title

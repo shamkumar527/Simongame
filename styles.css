@@ -46,14 +46,14 @@ body {
 
 /* ===== Tablets ===== */
 @media (max-width: 768px) {
-  #level-title { font-size: 2rem; margin: 30px; }
-  .btn { height: 150px; width: 150px; border: 8px solid black; }
-  .container { gap: 15px; }
+  #level-title { font-size: 2.2rem; margin: 30px; }
+  .btn { height: 250px; width: 250px; border: 10px solid black; }
+  .container { gap: 20px; }
 }
 
 /* ===== Mobile ===== */
 @media (max-width: 480px) {
-  #level-title { font-size: 1.2rem; margin: 20px; }
-  .btn { height: 100px; width: 100px; border: 6px solid black; }
-  .container { gap: 10px; }
+  #level-title { font-size: 1.8rem; margin: 20px; }
+  .btn { height: 300px; width: 300px; border: 10px solid black; }
+  .container { gap: 15px; }
 }

@@ -22,11 +22,11 @@ body {
 }
 
 .btn {
-  height: 200px;
-  width: 200px;
   border: 10px solid black;
   border-radius: 20%;
   cursor: pointer;
+  aspect-ratio: 1 / 1; /* Keep buttons square */
+  width: 200px; /* default desktop */
 }
 
 .red { background-color: red; }
@@ -47,13 +47,24 @@ body {
 /* ===== Tablets ===== */
 @media (max-width: 768px) {
   #level-title { font-size: 2.2rem; margin: 30px; }
-  .btn { height: 250px; width: 250px; border: 10px solid black; }
+  .btn { width: 220px; }
   .container { gap: 20px; }
 }
 
 /* ===== Mobile ===== */
 @media (max-width: 480px) {
   #level-title { font-size: 1.8rem; margin: 20px; }
-  .btn { height: 300px; width: 300px; border: 10px solid black; }
-  .container { gap: 15px; }
+
+  /* Make buttons big but fit screen width */
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    width: 100%;
+    max-width: 350px; /* optional max size for very small screens */
+  }
+
+  .btn {
+    width: 45vw; /* buttons take 45% of screen width each */
+    max-width: 160px; /* prevent too large on bigger phones */
+  }
 }

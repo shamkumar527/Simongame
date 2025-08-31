@@ -1,29 +1,32 @@
 body {
   text-align: center;
   background-color: #011F3F;
+  margin: 0;
 }
 
 #level-title {
   font-family: 'Press Start 2P', cursive;
   font-size: 3rem;
-  margin:  5%;
+  margin: 5%;
   color: #FEF2BF;
 }
 
 .container {
-  display: block;
-  width: 50%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
   margin: auto;
-
 }
 
 .btn {
-  margin: 25px;
-  display: inline-block;
   height: 200px;
   width: 200px;
   border: 10px solid black;
   border-radius: 20%;
+  cursor: pointer;
 }
 
 .game-over {
@@ -50,4 +53,40 @@ body {
 .pressed {
   box-shadow: 0 0 20px white;
   background-color: grey;
+}
+
+/* ===== Tablets (max-width: 768px) ===== */
+@media (max-width: 768px) {
+  #level-title {
+    font-size: 2rem;
+    margin: 30px;
+  }
+
+  .btn {
+    height: 150px;
+    width: 150px;
+    border: 8px solid black;
+  }
+
+  .container {
+    gap: 15px;
+  }
+}
+
+/* ===== Mobile (max-width: 480px) ===== */
+@media (max-width: 480px) {
+  #level-title {
+    font-size: 1.2rem;
+    margin: 20px;
+  }
+
+  .btn {
+    height: 100px;
+    width: 100px;
+    border: 6px solid black;
+  }
+
+  .container {
+    gap: 10px;
+  }
 }

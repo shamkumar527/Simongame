@@ -84,3 +84,21 @@ function startOver(){
     gamePattern = [];
     started = false;
 }
+
+// Start game on key press (desktop)
+$(document).keydown(function () {
+    if (!started) {
+        $("#level-title").text("Level " + level);
+        nextSequence();
+        started = true;
+    }
+});
+
+// Start game on tap/click (mobile)
+$("#level-title").click(function () {
+    if (!started) {
+        $("#level-title").text("Level " + level);
+        nextSequence();
+        started = true;
+    }
+});
